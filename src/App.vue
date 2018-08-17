@@ -5,8 +5,39 @@
 </template>
 
 <script>
+import libp2p from "libp2p";
+import PeerInfo from "peer-info";
+
+
+class P2P extends libp2p {
+   constructor( args ) {
+      const peerInfo = args.peerInfo;
+      const modules = {};
+      const config = {};
+
+      super( { config, modules, peerInfo } );
+   }
+};
+
+
 export default {
-  name: 'App'
+   name: 'App',
+   created() {
+      let node;
+
+      PeerInfo.create( ( error, peerInfo ) => {
+         if ( error ) return console.error( error );
+
+         const id = peerInfo.id.toB58String();
+         const ma = `/ip4/127.0.0.1/tcp/9090/ws/p2p-webrtc-star/ipfs/${id}`;
+
+         peerInfo.multiaddrs.add( ma );
+
+         node = new P2P( { peerInfo } );
+      } );
+
+      console.log( node );
+   },
 }
 </script>
 
