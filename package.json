@@ -10,7 +10,8 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "libp2p": "^0.23.1"
+    "libp2p": "^0.23.1",
+    "libp2p-webrtc-star": "^0.15.3"
   },
   "devDependencies": {
     "quasar-cli": "^0.17.0",

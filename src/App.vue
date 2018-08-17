@@ -7,12 +7,18 @@
 <script>
 import Node from "libp2p";
 import PeerInfo from "peer-info";
+import WebRTCStar from "libp2p-webrtc-star";
 
 
 class P2P extends Node {
    constructor( args ) {
       const peerInfo = args.peerInfo;
-      const modules = {};
+      const wstar = new WebRTCStar( { id: peerInfo.id } );
+      const modules = {
+         transport: [
+            wstar,
+         ],
+      };
       const config = {};
 
       super( { config, modules, peerInfo } );
@@ -34,9 +40,9 @@ export default {
          peerInfo.multiaddrs.add( ma );
 
          node = new P2P( { peerInfo } );
-      } );
 
-      console.log( node );
+         console.log( node );
+      } );
    },
 }
 </script>
