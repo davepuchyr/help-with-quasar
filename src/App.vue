@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import libp2p from "libp2p";
+import Node from "libp2p";
 import PeerInfo from "peer-info";
 
 
-class P2P extends libp2p {
+class P2P extends Node {
    constructor( args ) {
       const peerInfo = args.peerInfo;
       const modules = {};
